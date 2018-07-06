@@ -16,7 +16,7 @@ app.controller('KoalaController', ['$http', function($http){
             data:koalaToAdd
         }).then(function(res){
             console.log(res);
-           
+            self.getKoala();
         }).catch(function(err){
             console.log('ERROR!', err);
         });
@@ -28,20 +28,41 @@ app.controller('KoalaController', ['$http', function($http){
             url: '/koala',
             method: 'GET'
         }).then(function(res){
-            console.log(res)
+            console.log(res);
             self.koalaList = res.data;
         }).catch(function(err){
             console.log('Error in get', err)
         });
     }
-    self.getKoala()
-    // self.deleteKola = function(id){
-    //     console.log('id', id)
-    // }$http({
-    //     url: '/koala',
-    // })
+    self.getKoala();
+    
+    self.deleteKoala = function(id){
+        $http({
+            url: `/koala/${id}`,
+            method:'DELETE'
+        }).then(function(res){
+            console.log('Click Delete', res)
+            self.getKoala();
+        }).catch(function(error){
+            console.log('In Delete', error);
+        })
 
 
+    } 
+
+    self.markReady = function(koala){
+        console.log('in MarkReady', koala);
+        $http({
+            url:`/koala/${koala._id}`,
+            method : 'PUT',
+            data : {ready_to_transfer: false}
+        }).then(function(res){
+            console.log('In PUT', res);
+        }).catch( function(err){
+            console.log('in put err',err);
+        })
+    };
+    self.getKoala();
 
 
 

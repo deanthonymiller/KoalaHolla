@@ -19,11 +19,11 @@
       <br>
       <h2>Add Koala</h2>
       <!-- input fields -->
-          <input type="text" placeholder="name">
-          <input type="text" placeholder="gender">
-          <input type="number" placeholder="age">
-          <input type="text" placeholder="ready to transfer">
-          <input type="text" placeholder="Noes">
+          <input ng-model="vm.newKoala.name" type="text" placeholder="name">
+          <input ng-model="vm.newKoala.gender"type="text" placeholder="gender">
+          <input ng-model="vm.newKoala.age"type="number" placeholder="age">
+          <input ng-model="vm.newKoala.ready_to_transfer"type="text" placeholder="ready to transfer">
+          <input ng-model="vm.newKoala.notes"type="text" placeholder="Notes">
           <button ng-click="vm.addKoala(vm.newKoala)">Add Koala</button>
 
       <br>
