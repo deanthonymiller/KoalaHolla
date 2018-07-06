@@ -51,11 +51,7 @@ router.put('/:id', (req, res) => {
 
   Koala.findByIdAndUpdate({
     _id: id
-  }, {
-    $set: {
-      ready_to_transfer: koalaData.ready_to_transfer
-    }
-  }, {
+  }, koalaData , {
     new: true
   }).then((data) => {
     console.log(data);
