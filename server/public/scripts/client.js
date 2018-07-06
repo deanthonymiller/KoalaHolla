@@ -73,7 +73,7 @@ app.controller('KoalaController', ['$http', function($http){
         $http({
             url:`/koala/${koala._id}`,
             method : 'PUT',
-            data : {ready_to_transfer: true}
+            data : {ready_to_transfer: koala.ready_to_transfer}
         }).then(function(res){
             console.log('In PUT', res);
         }).catch( function(err){
@@ -82,6 +82,32 @@ app.controller('KoalaController', ['$http', function($http){
     };
     self.getKoala();
 
+
+    self.setUpUpdate = function(koala) {
+        koala.showEdit = !koala.showEdit;
+      };
+     
+      self.updateKoala = function(koala) {
+     
+        koala.showEdit = !koala.showEdit;
+     
+     
+        $http({
+          url: `/koala/${koala._id}`,
+          method: 'PUT',
+          data: koala
+        }).then(function(res){
+          console.log(res);
+          self.getKoala();
+        }).catch(function(err){
+          console.log(err);
+        });
+     
+     
+     
+      };
+
+    
 
 
 

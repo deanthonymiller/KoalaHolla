@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="styles/styles.css">
     <script src="vendors/angular.min.js" charset="utf-8"></script>
     <script src="vendors/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="scripts/client.js" charset="utf-8"></script>
   </head>
   <body ng-app="KoalaApp">
     <div ng-controller="KoalaController as vm" class="container-fluid">
       <header>
-        <img src="images/icon.png" class="icon" />
+        <img src="https://cdn.iconscout.com/public/images/icon/premium/png-512/koala-wombat-bear-animal-wallaroo-3958daa5dd9c5fe9-512x512.png" class="icon" />
         <h1>Koala Holla</h1>
         <h3>1976 Llama Comma Drive</h2>
         <h3>Walla Walla, WA</h2>
@@ -63,6 +64,7 @@
       <table class="table table-dark">
         <thead>
           <tr>
+            <th>Edit</th>
             <th>Name</th>
             <th>Gender</th>
             <th>Age</th> 
@@ -74,13 +76,44 @@
           </thead>
           <tbody>
           <tr ng-repeat="koala in vm.koalaList | filter : searchText">
-            <td>{{koala.name}}</td>
-            <td>{{koala.gender}}</td>
-            <td>{{koala.age}}</td>
+              <td ng-if="!koala.showEdit"><button class="btn btn-light" ng-click="vm.setUpUpdate(koala)" type="button" name="button"><i class="material-icons">mode_edit</i></button></td>
+
+              <td ng-if="koala.showEdit"><button class="btn btn-light" ng-click="vm.updateKoala(koala)" type="button" name="button">DONE</button></td>
+
+            <td ng-if="!koala.showEdit">{{koala.name}}</td>
+            <td ng-if="koala.showEdit">
+              <div class="input-group mb-3">
+                <input ng-model="koala.name" type="text" placeholder="{{koala.name}}" class="form-control">
+              </div>
+            </td>
+
+            <td ng-if="!koala.showEdit">{{koala.gender}}</td>
+            <td ng-if="koala.showEdit">
+                <div class="input-group mb-3">
+                  <input ng-model="koala.gender" type="text" placeholder="{{koala.gender}}" class="form-control">
+                </div>
+              </td>
+
+            <td ng-if="!koala.showEdit">{{koala.age}}</td>
+            <td ng-if="koala.showEdit">
+                <div class="input-group mb-3">
+                  <input ng-model="koala.age" type="text" placeholder="{{koala.age}}" class="form-control">
+                </div>
+              </td>
+
             <td>{{koala.ready_to_transfer}}</td>
-            <td>{{koala.notes}}</td>
-            <td ng-if="koala.ready_to_transfer"><span class="ready"> TRUE</td>
-            <td ng-if="!koala.ready_to_transfer"><button class="btn btn-outline-secondary" ng-click="vm.markReady(koala)">Mark Ready</button></td> 
+
+
+            <td ng-if="!koala.showEdit">{{koala.notes}}</td>
+            <td ng-if="koala.showEdit">
+                <div class="input-group mb-3">
+                  <input ng-model="koala.notes" type="text" placeholder="{{koala.notes}" class="form-control">
+                </div>
+              </td>
+
+
+            <td ng-if="koala.ready_to_transfer"><button class="btn btn-outline-secondary" ng-click="vm.markReady(koala)">Mark NOT Ready</button></td>
+            <td ng-if="!koala.ready_to_transfer" ><button class="btn btn-outline-secondary" ng-click="vm.markReady(koala)">Mark Ready</button></td> 
             <td><button class="btn btn-outline-danger" ng-click="vm.deleteKoala(koala)">Delete</button></td> 
           </tr>
         </tbody>

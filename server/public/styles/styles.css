@@ -1,6 +1,8 @@
 body, html {
     margin: 0;
     padding: 0;
+    background-color: black;
+    color: white;
 }
 
 h1 {
@@ -29,4 +31,8 @@ header {
 
 .ready{
     color : lightgreen;
+}
+
+th{
+    font-size: 1.4em;
 }
