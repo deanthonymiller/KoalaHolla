@@ -22,7 +22,7 @@
           <input ng-model="vm.newKoala.name" type="text" placeholder="name">
           <input ng-model="vm.newKoala.gender"type="text" placeholder="gender">
           <input ng-model="vm.newKoala.age"type="number" placeholder="age">
-          <input ng-model="vm.newKoala.ready_to_transfer"type="text" placeholder="ready to transfer">
+          <input ng-model="vm.newKoala.ready_to_transfer"type="text" placeholder="true/false">
           <input ng-model="vm.newKoala.notes"type="text" placeholder="Notes">
           <button ng-click="vm.addKoala(vm.newKoala)">Add Koala</button>
 
@@ -50,7 +50,8 @@
             <td>{{koala.age}}</td>
             <td>{{koala.ready_to_transfer}}</td>
             <td>{{koala.notes}}</td>
-            <td><button ng-click="vm.markReady(koala)">Mark Ready</button></td> 
+            <td ng-if="koala.ready_to_transfer">TRUE</td>
+            <td ng-if="!koala.ready_to_transfer"><button ng-click="vm.markReady(koala)">Mark Ready</button></td> 
             <td><button ng-click="vm.deleteKoala(koala._id)">Delete</button></td> 
           </tr>
         </tbody>

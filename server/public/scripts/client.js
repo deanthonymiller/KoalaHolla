@@ -51,11 +51,12 @@ app.controller('KoalaController', ['$http', function($http){
     } 
 
     self.markReady = function(koala){
+        koala.ready_to_transfer = !koala.ready_to_transfer;
         console.log('in MarkReady', koala);
         $http({
             url:`/koala/${koala._id}`,
             method : 'PUT',
-            data : {ready_to_transfer: false}
+            data : {ready_to_transfer: true}
         }).then(function(res){
             console.log('In PUT', res);
         }).catch( function(err){
