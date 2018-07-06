@@ -16,8 +16,9 @@ let koalaSchema = new Schema({
     required : true
   },
   ready_to_transfer : {
-    type : String,
-    required : true
+    type : Boolean,
+    required : true,
+    default: false
   },
   notes : {
     type : String,
