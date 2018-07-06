@@ -4,7 +4,7 @@ app.controller('KoalaController', ['$http', function($http){
 
     let self = this;
 
-    self.petList = [];
+    self.koalaList = [];
 
     //POST Koala
     self.addKoala = function(koalaToAdd){
@@ -16,10 +16,11 @@ app.controller('KoalaController', ['$http', function($http){
             data:koalaToAdd
         }).then(function(res){
             console.log(res);
-            self.getKoala()
+           
         }).catch(function(err){
             console.log('ERROR!', err);
-        })
+        });
+
     }
 
     self.getKoala = function(){
@@ -28,12 +29,17 @@ app.controller('KoalaController', ['$http', function($http){
             method: 'GET'
         }).then(function(res){
             console.log(res)
+            self.koalaList = res.data;
         }).catch(function(err){
             console.log('Error in get', err)
-        })
+        });
     }
-
-
+    self.getKoala()
+    // self.deleteKola = function(id){
+    //     console.log('id', id)
+    // }$http({
+    //     url: '/koala',
+    // })
 
 
 
