@@ -12,9 +12,7 @@ const db = `mongodb://localhost:27017/koalaholla`;
 
 const Koala = require('./models/koala.schema');
 
-mongoose.connect(db, {
-  useNewUrlParser: true
-});
+mongoose.connect(db);
 
 mongoose.connection.on('connected', () => {
   console.log('connected to mongodb');
