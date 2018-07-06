@@ -1,4 +1,6 @@
-body, html {
+
+body,
+html {
     margin: 0;
     padding: 0;
     background-color: black;
@@ -12,10 +14,14 @@ h1 {
 
 header {
     height: 150px;
+    background-color: lightskyblue;
+    padding: .85em;
+    color: black;
 }
 
 .icon {
-    float: left; margin: 0px 15px 15px 0px;
+    float: left;
+    margin: 0px 15px 15px 0px;
     width: 150px;
     height: 150px;
 }
@@ -25,14 +31,14 @@ header {
     margin: 0 auto;
 }
 
-.btn-outline-secondary{
+.btn-outline-secondary {
     color: white;
 }
 
-.ready{
-    color : lightgreen;
+.ready {
+    color: lightgreen;
 }
 
-th{
+th {
     font-size: 1.4em;
 }
