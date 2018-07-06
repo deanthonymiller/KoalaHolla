@@ -7,8 +7,8 @@
     <script src="vendors/angular.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
   </head>
-  <body>
-    <div class="container">
+  <body ng-app="KoalaApp">
+    <div ng-controller="KoalaController as vm" class="container">
       <header>
         <img src="images/icon.png" class="icon" />
         <h1>Koala Holla</h1>
@@ -19,11 +19,42 @@
       <br>
       <h2>Add Koala</h2>
       <!-- input fields -->
+          <input type="text" placeholder="name">
+          <input type="text" placeholder="gender">
+          <input type="number" placeholder="age">
+          <input type="text" placeholder="ready to transfer">
+          <input type="text" placeholder="Noes">
+          <button ng-click="vm.addKoala(vm.newKoala)">Add Koala</button>
+
       <br>
       <hr>
       <br>
       <h2>All Koalas</h2>
       <!-- table of koalas -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th> 
+            <th>Ready To Transfer</th>
+            <th>Notes</th>
+            <th>Mark Ready</th>
+            <th>Remove</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="koalas in vm.koalaList">
+            <td>{{koala.name}}</td>
+            <td>{{koala.gender}}</td>
+            <td>{{koala.age}}</td>
+            <td>{{koala.ready_to_transfer}}</td>
+            <td>{{koala.notes}}</td>
+            <td><button ng-click="vm.markReady(koala)">Mark Ready</button></td> 
+            <td><button ng-click="vm.deleteKoala(koala._id)">Delete</button></td> 
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
