@@ -1,117 +1,111 @@
 const app = angular.module('KoalaApp', []);
 
-app.controller('KoalaController', ['$http', function($http){
+app.controller('KoalaController', ['$http', function ($http) {
 
     let self = this;
 
     self.koalaList = [];
 
     //POST Koala
-    self.addKoala = function(koalaToAdd){
+    self.addKoala = function (koalaToAdd) {
         console.log(`adding Koala`, koalaToAdd);
-        
+
         $http({
-            url:'/koala',
-            method:'POST',
-            data:koalaToAdd
-        }).then(function(res){
+            url: '/koala',
+            method: 'POST',
+            data: koalaToAdd
+        }).then(function (res) {
             console.log(res);
             self.getKoala();
-        }).catch(function(err){
+        }).catch(function (err) {
             console.log('ERROR!', err);
         });
-
     }
 
-    self.getKoala = function(){
+    self.getKoala = function () {
         $http({
             url: '/koala',
             method: 'GET'
-        }).then(function(res){
+        }).then(function (res) {
             console.log(res);
             self.koalaList = res.data;
-        }).catch(function(err){
+        }).catch(function (err) {
             console.log('Error in get', err)
         });
     }
     self.getKoala();
-    
-    self.deleteKoala = function(koala){
+
+    self.deleteKoala = function (koala) {
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this Koala",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal(`Poof! ${koala.name} is dead!`, {
-                icon: "success",
-              });
-              $http({
-                url: `/koala/${koala._id}`,
-                method:'DELETE'
-            }).then(function(res){
-                console.log('Click Delete', res)
-                self.getKoala();
-            }).catch(function(error){
-                console.log('In Delete', error);
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Koala",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-            } else {
-              swal("Your Koala is Safe!");
-            }
-          });
-        
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal(`Poof! ${koala.name} is dead!`, {
+                        icon: "success",
+                    });
+                    $http({
+                        url: `/koala/${koala._id}`,
+                        method: 'DELETE'
+                    }).then(function (res) {
+                        console.log('Click Delete', res)
+                        self.getKoala();
+                    }).catch(function (error) {
+                        console.log('In Delete', error);
+                    })
+                }
+            });
+    }
 
-
-    } 
-
-    self.markReady = function(koala){
+    self.markReady = function (koala) {
         koala.ready_to_transfer = !koala.ready_to_transfer;
         console.log('in MarkReady', koala);
         $http({
-            url:`/koala/${koala._id}`,
-            method : 'PUT',
-            data : {ready_to_transfer: koala.ready_to_transfer}
-        }).then(function(res){
+            url: `/koala/${koala._id}`,
+            method: 'PUT',
+            data: {
+                ready_to_transfer: koala.ready_to_transfer
+            }
+        }).then(function (res) {
             console.log('In PUT', res);
-        }).catch( function(err){
-            console.log('in put err',err);
+        }).catch(function (err) {
+            console.log('in put err', err);
         })
     };
     self.getKoala();
 
 
-    self.setUpUpdate = function(koala) {
+    self.setUpUpdate = function (koala) {
         koala.showEdit = !koala.showEdit;
-      };
-     
-      self.updateKoala = function(koala) {
-     
-        koala.showEdit = !koala.showEdit;
-     
-     
-        $http({
-          url: `/koala/${koala._id}`,
-          method: 'PUT',
-          data: koala
-        }).then(function(res){
-          console.log(res);
-          self.getKoala();
-        }).catch(function(err){
-          console.log(err);
-        });
-     
-     
-     
-      };
+    };
 
-    
+    self.updateKoala = function (koala) {
+
+        koala.showEdit = !koala.showEdit;
+
+        $http({
+            url: `/koala/${koala._id}`,
+            method: 'PUT',
+            data: koala
+        }).then(function (res) {
+            console.log(res);
+            self.getKoala();
+        }).catch(function (err) {
+            console.log(err);
+        });
+
+
+
+    };
+
+
 
 
 
 
 
 }]);
-
