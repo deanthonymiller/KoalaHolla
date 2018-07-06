@@ -36,16 +36,33 @@ app.controller('KoalaController', ['$http', function($http){
     }
     self.getKoala();
     
-    self.deleteKoala = function(id){
-        $http({
-            url: `/koala/${id}`,
-            method:'DELETE'
-        }).then(function(res){
-            console.log('Click Delete', res)
-            self.getKoala();
-        }).catch(function(error){
-            console.log('In Delete', error);
-        })
+    self.deleteKoala = function(koala){
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Koala",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal(`Poof! ${koala.name} is dead!`, {
+                icon: "success",
+              });
+              $http({
+                url: `/koala/${koala._id}`,
+                method:'DELETE'
+            }).then(function(res){
+                console.log('Click Delete', res)
+                self.getKoala();
+            }).catch(function(error){
+                console.log('In Delete', error);
+            })
+            } else {
+              swal("Your Koala is Safe!");
+            }
+          });
+        
 
 
     } 
